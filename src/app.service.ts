@@ -6,6 +6,6 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
 	constructor(public readonly orm: MikroORM, public readonly em: EntityManager) {}
 	getHello(): string {
-		return 'Hello World!';
+		return 'Welcome to voidchan!';
 	}
 }
