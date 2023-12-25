@@ -15,9 +15,6 @@ export class FileMetadata {
 	@Property()
 	views!: number
 
-	@ManyToOne()
-	user!: User
-
 	constructor() {
 		this.views = 0;
 	}
