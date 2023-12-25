@@ -9,7 +9,7 @@ export class User {
 	@Property()
 	username: string
 
-	@OneToMany({ entity: () => User, mappedBy: 'files' })
+	@OneToMany(() => File, file => file.user)
 	files = new Collection<File>(this);
 
 	@Property({ onUpdate: () => new Date() })

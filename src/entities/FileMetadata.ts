@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { User } from './User';
 
 @Entity({ tableName: 'file_metadata' })
 export class FileMetadata {
@@ -14,8 +15,8 @@ export class FileMetadata {
 	@Property()
 	views!: number
 
-	@Property()
-	userId!: string
+	@ManyToOne()
+	user!: User
 
 	constructor() {
 		this.views = 0;
