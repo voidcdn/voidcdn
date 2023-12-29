@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 @Entity({ tableName: 'users' })
 export class User {
 	@PrimaryKey()
-	id!: string
+	_id!: string
 
 	@Property()
 	username!: string
@@ -27,7 +27,7 @@ export class User {
 	uploadKey = crypto.randomBytes(20).toString('hex');
 
 	constructor(id: string, username: string) {
-		this.id = id;
+		this._id = id;
 		this.username = username;
 		this.token = jwt.sign({ id, createdAt: this.createdAt}, process.env.SECRET);
 	}

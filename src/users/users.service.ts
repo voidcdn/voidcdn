@@ -13,12 +13,12 @@ export class UsersService {
 	) {}
 
 	async create(userData: User): Promise<User> {
-		const user = await this.repo.count({ id: userData.id });
+		const user = await this.repo.count({ _id: userData._id });
 		if (user > 0) {
 			throw new HttpException(HTTP_USER_ALREADY_EXISTS, HttpStatus.UNAUTHORIZED);
 		}
 
-		const data = new User(userData.id, userData.username);
+		const data = new User(crypto.randomUUID(), userData.username);
 		await this.em.persistAndFlush(data);
 
 		return data;

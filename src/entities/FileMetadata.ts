@@ -3,7 +3,7 @@ import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 @Entity({ tableName: 'file_metadata' })
 export class FileMetadata {
 	@PrimaryKey()
-	id!: string
+	_id!: string
 
 	@Property()
 	name!: string;

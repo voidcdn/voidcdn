@@ -5,7 +5,7 @@ import { User } from './User';
 @Entity({ tableName: 'files' })
 export class File {
 	@PrimaryKey()
-	id!: string;
+	_id!: string;
 
 	@OneToOne()
 	metadata!: FileMetadata

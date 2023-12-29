@@ -33,13 +33,13 @@ export class FilesService {
 		const file = new File();
 		const metadata = new FileMetadata();
 
-		metadata.id = id;
+		metadata._id = id;
 		metadata.mimetype = data.mimetype;
 		metadata.private = false;
 		metadata.views = 0;
 		metadata.name = randomString(7, false);
 
-		file.id = id;
+		file._id = id;
 		file.data = await data.toBuffer();
 		file.user = user;
 		file.metadata = metadata;
@@ -63,7 +63,7 @@ export class FilesService {
 			}
 			
 			
-		const file = await this.repo.findOne({ id: metadata.id });
+		const file = await this.repo.findOne({ _id: metadata._id });
 		metadata.views++
 
 		this.em.flush();

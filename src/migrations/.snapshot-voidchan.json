@@ -6,8 +6,8 @@
   "tables": [
     {
       "columns": {
-        "id": {
-          "name": "id",
+        "_id": {
+          "name": "_id",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -59,7 +59,7 @@
         {
           "keyName": "file_metadata_pkey",
           "columnNames": [
-            "id"
+            "_id"
           ],
           "composite": false,
           "primary": true,
@@ -71,8 +71,8 @@
     },
     {
       "columns": {
-        "id": {
-          "name": "id",
+        "_id": {
+          "name": "_id",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -132,7 +132,7 @@
         {
           "keyName": "users_pkey",
           "columnNames": [
-            "id"
+            "_id"
           ],
           "composite": false,
           "primary": true,
@@ -144,8 +144,8 @@
     },
     {
       "columns": {
-        "id": {
-          "name": "id",
+        "_id": {
+          "name": "_id",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -153,8 +153,8 @@
           "nullable": false,
           "mappedType": "string"
         },
-        "metadata_id": {
-          "name": "metadata_id",
+        "metadata__id": {
+          "name": "metadata__id",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -171,8 +171,8 @@
           "nullable": false,
           "mappedType": "blob"
         },
-        "user_id": {
-          "name": "user_id",
+        "user__id": {
+          "name": "user__id",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -186,17 +186,17 @@
       "indexes": [
         {
           "columnNames": [
-            "metadata_id"
+            "metadata__id"
           ],
           "composite": false,
-          "keyName": "files_metadata_id_unique",
+          "keyName": "files_metadata__id_unique",
           "primary": false,
           "unique": true
         },
         {
           "keyName": "files_pkey",
           "columnNames": [
-            "id"
+            "_id"
           ],
           "composite": false,
           "primary": true,
@@ -205,26 +205,26 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "files_metadata_id_foreign": {
-          "constraintName": "files_metadata_id_foreign",
+        "files_metadata__id_foreign": {
+          "constraintName": "files_metadata__id_foreign",
           "columnNames": [
-            "metadata_id"
+            "metadata__id"
           ],
           "localTableName": "public.files",
           "referencedColumnNames": [
-            "id"
+            "_id"
           ],
           "referencedTableName": "public.file_metadata",
           "updateRule": "cascade"
         },
-        "files_user_id_foreign": {
-          "constraintName": "files_user_id_foreign",
+        "files_user__id_foreign": {
+          "constraintName": "files_user__id_foreign",
           "columnNames": [
-            "user_id"
+            "user__id"
           ],
           "localTableName": "public.files",
           "referencedColumnNames": [
-            "id"
+            "_id"
           ],
           "referencedTableName": "public.users",
           "updateRule": "cascade"
