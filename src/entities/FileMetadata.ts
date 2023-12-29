@@ -1,5 +1,4 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
-import { User } from './User';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 @Entity({ tableName: 'file_metadata' })
 export class FileMetadata {
@@ -7,9 +6,12 @@ export class FileMetadata {
 	id!: string
 
 	@Property()
+	name!: string;
+
+	@Property()
 	mimetype!: string
 
-	@Property({ default: false })
+	@Property()
 	private!: boolean
 
 	@Property()

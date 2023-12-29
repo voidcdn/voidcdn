@@ -1,5 +1,7 @@
 import { Collection, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { File } from './File';
+import * as crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 
 @Entity({ tableName: 'users' })
 export class User {
@@ -7,7 +9,10 @@ export class User {
 	id!: string
 
 	@Property()
-	username: string
+	username!: string
+
+	@Property()
+	token!: string;
 
 	@OneToMany(() => File, file => file.user)
 	files = new Collection<File>(this);
@@ -17,4 +22,14 @@ export class User {
 
 	@Property()
 	createdAt = new Date();
+
+	@Property()
+	uploadKey = crypto.randomBytes(20).toString('hex');
+
+	constructor(id: string, username: string) {
+		this.id = id;
+		this.username = username;
+		this.token = jwt.sign({ id, createdAt: this.createdAt}, process.env.SECRET);
+	}
+
 }

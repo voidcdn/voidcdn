@@ -8,11 +8,11 @@ export class File {
 	id!: string;
 
 	@OneToOne()
-	metadata: FileMetadata
+	metadata!: FileMetadata
 
 	@Property({ type: 'bytea' })
 	data!: Buffer
 
-	@ManyToOne()
+	@ManyToOne(() => User)
 	user!: User
 }

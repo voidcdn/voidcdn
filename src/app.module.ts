@@ -1,23 +1,32 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { FilesModule } from './files/files.module';
-import { UsersController } from './users/users.controller';
+import { MikroOrmMiddleware, MikroOrmModule } from '@mikro-orm/nestjs';
 import { UsersModule } from './users/users.module';
+import { MikroORM } from '@mikro-orm/core';
+import { FilesModule } from './files/files.module';
 
 @Module({
 	imports: [
-		MikroOrmModule.forRoot({
-			entitiesTs: ['./src/entities'],
-			entities: ['./dist/entities'],
-			type: 'postgresql',
-			dbName: 'voidchan'
-		}),
-		FilesModule,
+		MikroOrmModule.forRoot(),
 		UsersModule,
+		FilesModule
 	],
-	controllers: [AppController, UsersController],
+	controllers: [AppController],
 	providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit, NestModule {
+	constructor(private readonly orm: MikroORM) {}
+
+	async onModuleInit(): Promise<void> {
+		// const gen = this.orm.getSchemaGenerator();
+		// await gen.createSchema();
+		await this.orm.getMigrator().up();
+	}
+
+	configure(consumer: MiddlewareConsumer) {
+		consumer
+			.apply(MikroOrmMiddleware)
+			.forRoutes('*');
+	}
+}
