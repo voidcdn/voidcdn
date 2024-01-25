@@ -5,6 +5,7 @@ import { MikroOrmMiddleware, MikroOrmModule } from '@mikro-orm/nestjs';
 import { UsersModule } from './users/users.module';
 import { MikroORM } from '@mikro-orm/core';
 import { FilesModule } from './files/files.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
 	imports: [
@@ -26,7 +27,7 @@ export class AppModule implements OnModuleInit, NestModule {
 
 	configure(consumer: MiddlewareConsumer) {
 		consumer
-			.apply(MikroOrmMiddleware)
+			.apply(MikroOrmMiddleware, LoggerMiddleware)
 			.forRoutes('*');
 	}
 }

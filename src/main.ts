@@ -7,11 +7,12 @@ async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(
 		AppModule,
 		new FastifyAdapter({
-			bodyLimit: 100 * 1024 * 1024, // set to 100mb max file size
+			bodyLimit: 100 * 1024 * 1024, // set to 100mb max file size,
+			trustProxy: true
 		})
 	);
 
-	app.register(multipart)
+	app.register(multipart);
 	await app.listen(3000);
 }
 
