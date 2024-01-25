@@ -10,7 +10,7 @@ export class FilesController {
 	// Endpoint that is accessed by ShareX (for now)
 	@Post('/upload')
 	async upload(@BindUser('uploadKey') uploadKey: string, @Headers('authorization') authKey: string, @Req() req: fastify.FastifyRequest, @Res() res: fastify.FastifyReply) {
-		return this.fileService.upload(authKey, req, res, uploadKey);
+		return this.fileService.upload(req, res, uploadKey);
 	}
 
 	@Get(':name')

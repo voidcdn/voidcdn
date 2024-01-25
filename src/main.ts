@@ -11,7 +11,6 @@ async function bootstrap() {
 		})
 	);
 
-	console.log(process.env.POSTGRES_PASSWORD)
 	app.register(multipart)
 	await app.listen(3000);
 }

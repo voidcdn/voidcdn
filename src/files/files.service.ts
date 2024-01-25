@@ -18,7 +18,7 @@ export class FilesService {
 		private readonly em: EntityManager,
 	) {}
 
-	async upload(authKey: string, req: fastify.FastifyRequest, res: fastify.FastifyReply, uploadKey: string) {
+	async upload(req: fastify.FastifyRequest, res: fastify.FastifyReply, uploadKey: string) {
 		if (!req.isMultipart) {
 			res.send(new BadRequestException(
 				'Request is not multipart'
@@ -47,7 +47,6 @@ export class FilesService {
 		user.files.add(file);
 
 		await this.em.flush();
-		console.log('test')
 
 		res.send({ file: metadata.name });
 		return;
